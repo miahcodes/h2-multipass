@@ -12,6 +12,7 @@ import {
 /**
  * @param {LayoutProps}
  */
+
 export function Layout({cart, children = null, footer, header, isLoggedIn}) {
   return (
     <>

@@ -25,6 +25,7 @@ export function CartMain({layout, cart}) {
  * @param {CartMainProps}
  */
 function CartDetails({layout, cart}) {
+
   const cartHasItems = !!cart && cart.totalQuantity > 0;
 
   return (
@@ -48,13 +49,14 @@ function CartDetails({layout, cart}) {
  */
 function CartLines({lines, layout}) {
   if (!lines) return null;
-
   return (
     <div aria-labelledby="cart-lines">
       <ul>
-        {lines.nodes.map((line) => (
-          <CartLineItem key={line.id} line={line} layout={layout} />
-        ))}
+        {lines.nodes.map((line) => {
+            if(line.merchandise === undefined) return null;
+            return <CartLineItem key={line.id} line={line} layout={layout} />
+          }
+        )}
       </ul>
     </div>
   );
@@ -123,7 +125,7 @@ function CartCheckoutActions({checkoutUrl}) {
 
   return (
     <MultipassCheckoutButton checkoutUrl={checkoutUrl}>
-      <p>Continue to Checkout &rarr;</p>
+      <p attr="mp-cbtn">Continue to Checkout &rarr;</p>
     </MultipassCheckoutButton>
   );
 }
